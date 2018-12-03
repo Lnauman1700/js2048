@@ -134,3 +134,12 @@ const moveRight = () => {
   }
   updateGrid();
 }
+
+module.exports = {
+  createGrid,
+  updateGrid,
+  moveUp,
+  moveDown,
+  moveLeft,
+  moveRight,
+};
