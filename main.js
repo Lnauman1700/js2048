@@ -50,3 +50,58 @@ const updateGrid = () => {
 }
 
 updateGrid();
+
+const move = (direction) => {
+  //if the key pressed was the left arrow...
+  if(direction == "left") {
+    //loop through each row
+    for(let row of grid) {
+      //loop through each value in row, starting from the leftmost.
+      for(let i = 0; i < row.length; i++) {
+        //if the current slot has a value inside...
+        if(row[i] != null) {
+          //store its value, and make that slot null.
+          let value = row[i];
+          row[i] = null;
+          let index = i - 1;
+          /*loop downwards until you either hit the beginning of the row or you hit
+          a non-null value.*/
+          while(index >= 0 && row[index] == null) {
+            //decrease index
+            index--;
+          }
+          //replace the value at index+1 (should be null) with the stored value.
+          row[index+1] = value;
+        }
+      }
+    }
+  }
+  //if the key pressed was the right arrow...
+  //we do the same thing as above, more or less, except we start from the end of the row array
+  if(direction == "right") {
+    for(let row of grid) {
+      //loop through each value in row, starting from the rightmost.
+      for(let i = row.length - 1; i >= 0; i--) {
+        if(row[i] != null) {
+          let value = row[i];
+          row[i] = null;
+          let index = i + 1;
+          while(index <= 3 && row[index] == null) {
+            index++;
+          }
+          row[index-1] = value;
+        }
+      }
+    }
+  }
+}
+grid[2][3] = 4;
+grid[2][0] = 2;
+grid[2][1] = 3;
+grid[3][3] = 4;
+grid[3][0] = 2;
+grid[3][1] = 3;
+move("left");
+updateGrid();
+move("right");
+updateGrid();
