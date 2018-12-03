@@ -50,7 +50,25 @@ const updateGrid = () => {
 }
 
 updateGrid();
+//End initialize Game
 
+//KeyListeners.
+document.addEventListener('keydown', (event) => {
+  if (event.key=="ArrowUp"){
+      moveUp();
+  } else if (event.key=="ArrowDown"){
+      moveDown();
+  } else if (event.key=="ArrowRight"){
+      moveRight();
+  } else if (event.key=="ArrowLeft"){
+      moveLeft();
+  } else {
+    //console.log("Not a valid keystroke");
+  }
+});
+
+
+//Movement
 const moveUp = () => {
   for(let col = 0; col < 4; col++) {
 
