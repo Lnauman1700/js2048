@@ -67,6 +67,23 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+//Spawn Tiles
+const spawnRandomTile=()=>{
+  //Set up location and what tiles spawn.
+  let randomcol= Math.floor((Math.random()*4));
+  let randomrow= Math.floor((Math.random()*4));
+  let tiles= [2,4];
+  let newTile= tiles[Math.floor(Math.random()*tiles.length)];
+  updateGrid();
+    while (!grid[randomcol][randomrow] == null) {
+      console.log("Space not available. Rolling again.");
+      randomcol= Math.floor((Math.random()*4));
+      randomrow= Math.floor((Math.random()*4));
+    }
+    console.log(`grid([${randomrow}][${randomcol}])`);
+    grid[randomrow][randomcol]= newTile;
+    updateGrid();
+}
 
 //Movement
 const moveUp = () => {
@@ -152,7 +169,6 @@ const moveRight = () => {
   }
   updateGrid();
 }
-
 module.exports = {
   createGrid,
   updateGrid,
