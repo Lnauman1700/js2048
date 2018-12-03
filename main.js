@@ -136,4 +136,6 @@ const move = (direction) => {
 
   updateGrid();
 }
+grid[2][1]=2;
+updateGrid();
 document.addEventListener('keydown', move);
