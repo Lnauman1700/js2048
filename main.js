@@ -95,13 +95,3 @@ const move = (direction) => {
     }
   }
 }
-grid[2][3] = 4;
-grid[2][0] = 2;
-grid[2][1] = 3;
-grid[3][3] = 4;
-grid[3][0] = 2;
-grid[3][1] = 3;
-move("left");
-updateGrid();
-move("right");
-updateGrid();
