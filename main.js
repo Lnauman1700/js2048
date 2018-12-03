@@ -94,4 +94,45 @@ const move = (direction) => {
       }
     }
   }
+
+  if(direction = "up") {
+    for(let col = 0; col < 4; col++) {
+
+      for(let i = 0; i < grid.length; i++) {
+        if(grid[i][col] != null) {
+          let value = grid[i][col];
+          grid[i][col] = null;
+          let index = i - 1;
+
+          while(index >= 0 && grid[index][col] == null) {
+            index--;
+          }
+
+          grid[index+1][col] = value;
+        }
+      }
+    }
+  }
+
+  if(direction = "down") {
+    for(let col = 0; col < 4; col++) {
+
+      for(let i = grid.length - 1; i >= 0; i--) {
+        //grid[i][col];
+        if(grid[i][col] != null) {
+          let value = grid[i][col];
+          grid[i][col] = null;
+          let index = i + 1;
+
+          while(index <= 3 && grid[index][col] == null) {
+            index++;
+          }
+
+          grid[index-1][col] = value;
+        }
+      }
+    }
+  }
+
+  updateGrid();
 }
