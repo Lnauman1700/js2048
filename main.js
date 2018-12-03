@@ -1,6 +1,5 @@
 
 let grid = [];
-
 //fills grid with all null values.
 const createGrid = () => {
   for(let i = 0; i < 4; i++) {
@@ -52,8 +51,9 @@ const updateGrid = () => {
 updateGrid();
 
 const move = (direction) => {
+  let e = window.event;
   //if the key pressed was the left arrow...
-  if(direction == "left") {
+  if(direction == "left" || e.keyCode == '37') {
     //loop through each row
     for(let row of grid) {
       //loop through each value in row, starting from the leftmost.
@@ -78,7 +78,7 @@ const move = (direction) => {
   }
   //if the key pressed was the right arrow...
   //we do the same thing as above, more or less, except we start from the end of the row array
-  if(direction == "right") {
+  if(direction == "right" || e.keyCode == '39') {
     for(let row of grid) {
       //loop through each value in row, starting from the rightmost.
       for(let i = row.length - 1; i >= 0; i--) {
@@ -95,7 +95,7 @@ const move = (direction) => {
     }
   }
 
-  if(direction = "up") {
+  if(direction = "up" || e.keyCode == '38') {
     for(let col = 0; col < 4; col++) {
 
       for(let i = 0; i < grid.length; i++) {
@@ -114,7 +114,7 @@ const move = (direction) => {
     }
   }
 
-  if(direction = "down") {
+  if(direction = "down" || e.keyCode == '40') {
     for(let col = 0; col < 4; col++) {
 
       for(let i = grid.length - 1; i >= 0; i--) {
@@ -136,3 +136,4 @@ const move = (direction) => {
 
   updateGrid();
 }
+document.addEventListener('keydown', move);
