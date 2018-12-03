@@ -1,0 +1,22 @@
+{
+  "name": "js2048",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lnauman1700/js2048.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lnauman1700/js2048/issues"
+  },
+  "homepage": "https://github.com/Lnauman1700/js2048#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
+}
