@@ -1,6 +1,16 @@
 
 let grid = [];
 
+function beep() {
+    var snd = new Audio("./sound/merge.wav");
+    snd.play();
+}
+
+function boop() {
+    var snd = new Audio("./sound/move.wav");
+    snd.play();
+}
+
 //fills grid with all null values.
 const createGrid = () => {
   for(let i = 0; i < 4; i++) {
@@ -90,7 +100,6 @@ document.addEventListener('keydown', (event) => {
     //console.log("Not a valid keystroke");
   }
 });
-
 //Spawn Tiles
 const spawnRandomTile=()=>{
   //Set up location and what tiles spawn.
@@ -163,6 +172,7 @@ const moveUp = () => {
       }
     }
   }
+  boop();
   spawnRandomTile();
   updateGrid();
 }
@@ -203,6 +213,7 @@ const moveDown = () => {
       }
     }
   }
+  boop();
   spawnRandomTile();
   updateGrid();
 }
@@ -229,6 +240,7 @@ const moveLeft = () => {
       }
     }
   }
+  boop();
   spawnRandomTile();
   updateGrid();
 }
@@ -249,6 +261,7 @@ const moveRight = () => {
       }
     }
   }
+  boop();
   spawnRandomTile();
   updateGrid();
 }
@@ -274,6 +287,7 @@ const mergeTiles = (set, direction) => {
         //remove the starter number, it will now be merged into set[index]
         set[i] = null;
         //increase merges so that we don't check a slot we already merged
+        beep();
         merges++;
       }
       //increment
