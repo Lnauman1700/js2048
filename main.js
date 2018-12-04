@@ -51,6 +51,29 @@ const updateGrid = () => {
 
 updateGrid();
 //End initialize Game
+//CheckTiles
+function isArrayFull(arr) {
+  let fullCount = 0;
+  for(let i = 0; i < 4; i++) {
+    let row = [];
+    for(let n = 0; n < 4; n++) {
+      //Check each key in row
+        if (typeof grid[i][n]!= 'object'){
+          fullCount++
+        } else {
+          //Don't count.
+        }
+    }
+    //Check each row
+
+  }
+  if (fullCount >= 16){
+    return true;
+  } else {
+    return false;
+  }
+}
+
 
 //KeyListeners.
 document.addEventListener('keydown', (event) => {
@@ -67,6 +90,39 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+//Spawn Tiles
+const spawnRandomTile=()=>{
+  //Set up location and what tiles spawn.
+  console.log(`Spawning tile.`);
+  let randomcol= Math.floor((Math.random()*4));
+  let randomrow= Math.floor((Math.random()*4));
+  let tiles= [2,4];
+  let newTile= tiles[Math.floor(Math.random()*tiles.length)];
+
+    if (typeof grid[randomrow][randomcol]== 'object' && typeof grid[randomrow][randomcol]!= 'string') {
+      if (isArrayFull(grid)== true){
+        console.log( `The Board is Full.`);
+        updateGrid();
+        return;
+      }
+      console.log(`grid([${randomrow}][${randomcol}])`);
+      grid[randomrow][randomcol]= newTile;
+      updateGrid();
+    } else {
+      console.log("Space not available. Rolling again.");
+      updateGrid();
+      if (isArrayFull(grid)== true){
+        console.log( `Grid is full. Do not draw more.`);
+        updateGrid();
+     } else {
+       console.log(`Grid isn't full. Roll.`);
+       spawnRandomTile();
+       updateGrid();
+      }
+    }
+}
+spawnRandomTile();
+//End Spawn Tiles
 
 //Movement
 const moveUp = () => {
@@ -86,6 +142,7 @@ const moveUp = () => {
       }
     }
   }
+  spawnRandomTile();
   updateGrid();
 }
 
@@ -107,6 +164,7 @@ const moveDown = () => {
       }
     }
   }
+  spawnRandomTile();
   updateGrid();
 }
 
@@ -132,6 +190,7 @@ const moveLeft = () => {
       }
     }
   }
+  spawnRandomTile();
   updateGrid();
 }
 
@@ -150,9 +209,9 @@ const moveRight = () => {
       }
     }
   }
+  spawnRandomTile();
   updateGrid();
 }
-
 module.exports = {
   createGrid,
   updateGrid,
