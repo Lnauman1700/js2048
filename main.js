@@ -127,8 +127,15 @@ const moveLeft = () => {
           //decrease index
           index--;
         }
+
+        if(row[index] == value) {
+          let newVal = value*2;
+          row[index] = newVal;
+        }
         //replace the value at index+1 (should be null) with the stored value.
-        row[index+1] = value;
+        else{
+          row[index+1] = value;
+        }
       }
     }
   }
@@ -151,6 +158,19 @@ const moveRight = () => {
     }
   }
   updateGrid();
+}
+
+const mergeTiles = (tile1) => {
+
+}
+
+const checkMerge = (tile1, tile2) => {
+  if(tile1 == tile2) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 module.exports = {
