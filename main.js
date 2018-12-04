@@ -113,6 +113,7 @@ const moveDown = () => {
 const moveLeft = () => {
   //loop through each row
   for(let row of grid) {
+    mergeTiles(row, "left");
     //loop through each value in row, starting from the leftmost.
     for(let i = 0; i < row.length; i++) {
       //if the current slot has a value inside...
@@ -127,15 +128,7 @@ const moveLeft = () => {
           //decrease index
           index--;
         }
-
-        if(row[index] == value) {
-          let newVal = value*2;
-          row[index] = newVal;
-        }
-        //replace the value at index+1 (should be null) with the stored value.
-        else{
-          row[index+1] = value;
-        }
+        row[index+1] = value;
       }
     }
   }
@@ -144,6 +137,7 @@ const moveLeft = () => {
 
 const moveRight = () => {
   for(let row of grid) {
+
     //loop through each value in row, starting from the rightmost.
     for(let i = row.length - 1; i >= 0; i--) {
       if(row[i] != null) {
@@ -159,9 +153,27 @@ const moveRight = () => {
   }
   updateGrid();
 }
-
-const mergeTiles = (tile1) => {
-
+//almost working, but it's making a bunch of extra zero's
+const mergeTiles = (set, direction) => {
+  if(direction == "left" || direction == "up") {
+    let i = 1;
+    let merges = 0;
+    while(i < set.length) {
+      let index = i - 1;
+      let value = set[i];
+      while(index > merges && set[index] == null) {
+        //decrease index
+        index--;
+      }
+      if(set[index] == set[i] && set[index] != null) {
+        set[index] = value*2;
+        set[i] = null;
+        merges++;
+      }
+      i++;
+    }
+    return merges;
+  }
 }
 
 const checkMerge = (tile1, tile2) => {
@@ -172,6 +184,11 @@ const checkMerge = (tile1, tile2) => {
     return false;
   }
 }
+
+grid[0][0] = 10;
+grid[0][2] = 10;
+grid[0][3] = 10;
+updateGrid();
 
 module.exports = {
   createGrid,
