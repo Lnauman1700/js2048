@@ -100,6 +100,30 @@ document.addEventListener('keydown', (event) => {
     //console.log("Not a valid keystroke");
   }
 });
+
+//Check //
+function checkWin(arr) {
+  let winCount = 0;
+  for(let i = 0; i < 4; i++) {
+    let row = [];
+    for(let n = 0; n < 4; n++) {
+      //Check each key in row
+        if (grid[i][n]==2048){
+          winCount++;
+        } else {
+          //Don't count.
+        }
+    }
+    //Check each row
+
+  }
+  if (winCount >= 1){
+    return true;
+  } else {
+    return false;
+  }
+}
+
 //Spawn Tiles
 const spawnRandomTile=()=>{
   //Set up location and what tiles spawn.

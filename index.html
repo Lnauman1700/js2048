@@ -4,11 +4,19 @@
     <meta charset="utf-8">
     <title>2048</title>
     <style>
+    @font-face {
+      font-family: "Transistor";
+      src: url("Transist.ttf") format("ttf"),
+    }
+    body{
+      font-family: 'Transistor';
+    }
     table{
       margin: auto;
+      padding: 0;
     }
       td {
-        font-family: '';
+        padding: 0;
         border: 1px solid black;
         height: 50px;
         width: 50px;
@@ -19,9 +27,16 @@
         height:50px;
         width: 50px;
       }
+      h1, h2,p{
+        text-align: center;
+      }
     </style>
   </head>
   <body>
+    <h1>2048</h1>
+    <h2>Developed by</h2>
+    <p>Lucas</p>
+    <p>Danny</p>
     <script defer src="main.js"></script>
   </body>
 </html>
