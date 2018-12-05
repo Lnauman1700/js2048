@@ -178,7 +178,7 @@ const moveDown = () => {
     while(i >= 0) {
       let value = grid[i][col];
       let index = i + 1;
-      while(index < (grid.length-2) - merges && grid[index][col] == null) {
+      while(index < (grid.length-1) - merges && grid[index][col] == null) {
         index++;
       }
       if(grid[index][col] == grid[i][col] && grid[index][col] != null) {
@@ -318,7 +318,7 @@ const mergeTiles = (set, direction) => {
     return set;
   }
 }
-//only bug left is that, when a row/column is full and the 2 middle numbers are equal to the last number in the grid, they'll all 3 combine
+//only bug left is that, when a column is full and the 2 middle numbers are equal to the last number in the grid, they'll all 3 combine. ONLY WHEN YOU MOVE DOWN
 //I think this has to do with the merges workaround only ignoring the value in the first slot, and not the value in the 2nd or the 3rd slots
 
 module.exports = {
