@@ -1,6 +1,9 @@
 let grid = [];
 let playable;
+let score;
+let scoreAdd;
 const gameMessage = document.getElementById('gamemessage');
+const scoreBoard = document.getElementById('scorebox');
 
 function beep() {
     var snd = new Audio("./sound/merge.wav");
@@ -18,6 +21,11 @@ function blip() {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+//Create Score
+const addScore = () =>{
+  scoreBoard.innerHTML = `Score: ${score}`;
+
+}
 //fills grid with all null values.
 const createGrid = () => {
   for(let i = 0; i < 4; i++) {
@@ -28,9 +36,13 @@ const createGrid = () => {
     grid.push(row);
   }
   playable= true;
+  score = 0;
+  scoreAdd = 0;
+  addScore();
   return grid;
 }
 createGrid();
+
 //Check //
 function checkWin(arr) {
   let winCount = 0;
@@ -191,6 +203,8 @@ const moveUp = () => {
       if(grid[index][col] == grid[i][col] && grid[index][col] != null) {
         //change the number you hit to 2x its value
         grid[index][col] = value*2;
+        scoreAdd = value*2;
+        score += scoreAdd;
         //remove the starter number, it will now be merged into set[index]
         grid[i][col] = null;
         //increase merges so that we don't check a slot we already merged
@@ -217,6 +231,7 @@ const moveUp = () => {
     }
   }
 //  boop();
+  addScore();
   spawnRandomTile();
   updateGrid();
 }
@@ -239,6 +254,8 @@ const moveDown = () => {
       if(grid[index][col] == grid[i][col] && grid[index][col] != null) {
         //change the number you hit to 2x its value
         grid[index][col] = value*2;
+        scoreAdd = value*2;
+        score += scoreAdd;
         //remove the starter number, it will now be merged into set[index]
         grid[i][col] = null;
         //increase merges so that we don't check a slot we already merged
@@ -266,6 +283,7 @@ const moveDown = () => {
     }
   }
 //  boop();
+  addScore();
   spawnRandomTile();
   updateGrid();
 }
@@ -344,6 +362,9 @@ const mergeTiles = (set, direction) => {
       if(set[index] == set[i] && set[index] != null) {
         //change the number you hit to 2x its value
         set[index] = value*2;
+        scoreAdd = value*2;
+        score += scoreAdd;
+        console.log(scoreAdd);
         //remove the starter number, it will now be merged into set[index]
         set[i] = null;
         //increase merges so that we don't check a slot we already merged
@@ -354,6 +375,7 @@ const mergeTiles = (set, direction) => {
       i++;
     }
     //return the new, unmoved array
+    addScore();
     return set;
   }
   else {
@@ -373,6 +395,9 @@ const mergeTiles = (set, direction) => {
       if(set[index] == set[i] && set[index] != null) {
         //change the number you hit to 2x its value
         set[index] = value*2;
+        scoreAdd = value*2;
+        score += scoreAdd;
+        console.log(scoreAdd);
         //remove the starter number, it will now be merged into set[index]
         set[i] = null;
         //increase merges so that we don't check a slot we already merged
@@ -382,6 +407,7 @@ const mergeTiles = (set, direction) => {
       i--;
     }
     //return the new, unmoved (but combined) array
+    addScore();
     return set;
   }
 }
