@@ -1,6 +1,23 @@
-
 let grid = [];
+let playable;
+const gameMessage = document.getElementById('gamemessage');
 
+function beep() {
+    var snd = new Audio("./sound/merge.wav");
+    snd.play();
+}
+
+function boop() {
+    var snd = new Audio("./sound/move.wav");
+    snd.play();
+}
+function blip() {
+    var snd = new Audio("./sound/lvlup.wav");
+    snd.play();
+}
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 //fills grid with all null values.
 const createGrid = () => {
   for(let i = 0; i < 4; i++) {
@@ -10,10 +27,36 @@ const createGrid = () => {
     }
     grid.push(row);
   }
+  playable= true;
   return grid;
 }
 createGrid();
+//Check //
+function checkWin(arr) {
+  let winCount = 0;
+  for(let i = 0; i < 4; i++) {
+    let row = [];
+    for(let n = 0; n < 4; n++) {
+      //Check each key in row
+        if (grid[i][n]==2048){
+          winCount++;
+        } else {
+          //Don't count.
+        }
+    }
+    //Check each row
 
+  }
+  if (winCount == 1){
+    playable = false;
+    //sleep(500);
+    gameMessage.innerHTML= "Win";
+    //alert("You Win.");
+    return true;
+  } else {
+    return false;
+  }
+}
 //updates the table in the HTML to accurately resemble the current state of
 //the array grid
 const updateGrid = () => {
@@ -48,11 +91,10 @@ const updateGrid = () => {
     table.appendChild(row);
   }
   document.body.appendChild(table);
+  checkWin(grid);
 }
 
 updateGrid();
-//End initialize Game
-//CheckTiles
 function isArrayFull(arr) {
   let fullCount = 0;
   for(let i = 0; i < 4; i++) {
@@ -94,6 +136,10 @@ document.addEventListener('keydown', (event) => {
 //Spawn Tiles
 const spawnRandomTile=()=>{
   //Set up location and what tiles spawn.
+  if (playable == false){
+    console.log(`Game is currently not playable. Either a loss or win was recorded.`);
+    return;
+  }
   console.log(`Spawning tile.`);
   let randomcol= Math.floor((Math.random()*4));
   let randomrow= Math.floor((Math.random()*4));
@@ -127,6 +173,10 @@ spawnRandomTile();
 
 //Movement
 const moveUp = () => {
+  if (playable == false){
+    console.log(`Game is currently not playable. Either a loss or win was recorded.`);
+    return;
+  }
 
   for(let col = 0; col < 4; col++) {
     //keeps track of amount of merges, and keeps you from combining with something that's already been combined
@@ -163,11 +213,16 @@ const moveUp = () => {
       }
     }
   }
+//  boop();
   spawnRandomTile();
   updateGrid();
 }
 
 const moveDown = () => {
+  if (playable == false){
+    console.log(`Game is currently not playable. Either a loss or win was recorded.`);
+    return;
+  }
   for(let col = 0; col < 4; col++) {
     //keeps track of amount of merges, and keeps you from combining with something that's already been combined
     let merges = 0;
@@ -203,11 +258,16 @@ const moveDown = () => {
       }
     }
   }
+//  boop();
   spawnRandomTile();
   updateGrid();
 }
 
 const moveLeft = () => {
+  if (playable == false){
+    console.log(`Game is currently not playable. Either a loss or win was recorded.`);
+    return;
+  }
   //loop through each row
   for(let row of grid) {
     mergeTiles(row, "left");
@@ -229,11 +289,16 @@ const moveLeft = () => {
       }
     }
   }
+//  boop();
   spawnRandomTile();
   updateGrid();
 }
 
 const moveRight = () => {
+  if (playable == false){
+    console.log(`Game is currently not playable. Either a loss or win was recorded.`);
+    return;
+  }
   for(let row of grid) {
     mergeTiles(row, "right");
     //loop through each value in row, starting from the rightmost.
@@ -249,6 +314,7 @@ const moveRight = () => {
       }
     }
   }
+//  boop();
   spawnRandomTile();
   updateGrid();
 }
@@ -274,6 +340,7 @@ const mergeTiles = (set, direction) => {
         //remove the starter number, it will now be merged into set[index]
         set[i] = null;
         //increase merges so that we don't check a slot we already merged
+        //beep();
         merges++;
       }
       //increment
