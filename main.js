@@ -35,6 +35,11 @@ const getGrid = () => {
   return grid;
 }
 
+const changeTile = (x, y, value) => {
+  grid[x][y] = value;
+  return grid[x][y];
+}
+
 //Check //
 function checkWin(arr) {
   let winCount = 0;
@@ -402,4 +407,5 @@ module.exports = {
   mergeTiles,
   spawnRandomTile,
   getGrid,
+  changeTile,
 };
