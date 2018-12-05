@@ -20,17 +20,21 @@ function sleep(ms) {
 }
 //fills grid with all null values.
 const createGrid = () => {
-  for(let i = 0; i < 4; i++) {
-    let row = [];
-    for(let n = 0; n < 4; n++) {
-      row.push(null);
-    }
-    grid.push(row);
-  }
+  grid = [
+    [null, null, null, null],
+    [null, null, null, null],
+    [null, null, null, null],
+    [null, null, null, null]
+  ]
   playable= true;
   return grid;
 }
 createGrid();
+
+const getGrid = () => {
+  return grid;
+}
+
 //Check //
 function checkWin(arr) {
   let winCount = 0;
@@ -395,4 +399,7 @@ module.exports = {
   moveDown,
   moveLeft,
   moveRight,
+  mergeTiles,
+  spawnRandomTile,
+  getGrid,
 };
