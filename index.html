@@ -3,40 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>2048</title>
-    <style>
-    @font-face {
-      font-family: "Transistor";
-      src: url("Transist.ttf") format("ttf"),
-    }
-    body{
-      font-family: 'Transistor';
-    }
-    table{
-      margin: auto;
-      padding: 0;
-    }
-      td {
-        padding: 0;
-        border: 1px solid black;
-        height: 50px;
-        width: 50px;
-        text-align:center;
-      }
-      tr {
-        border: 1px solid black;
-        height:50px;
-        width: 50px;
-      }
-      h1, h2,p{
-        text-align: center;
-      }
-    </style>
+    <link href="styles.css" type="text/css" rel="stylesheet" />
   </head>
   <body>
-    <h1>2048</h1>
-    <h2>Developed by</h2>
-    <p>Lucas</p>
-    <p>Danny</p>
     <script defer src="main.js"></script>
+      <h1>2048</h1>
+    <div class="backgrounddiv"></div>
+    <div class="gamemsgwrapper">
+      <div id="scorebox">12345</div>
+      <div id="gamemessage"></div>
+    </div>
   </body>
 </html>
