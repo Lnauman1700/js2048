@@ -26,6 +26,7 @@ const addScore = () =>{
   scoreBoard.innerHTML = `Score: ${score}`;
 
 }
+//End Create Score
 //fills grid with all null values.
 const createGrid = () => {
   for(let i = 0; i < 4; i++) {
