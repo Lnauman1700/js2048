@@ -129,37 +129,40 @@ spawnRandomTile();
 const moveUp = () => {
 
   for(let col = 0; col < 4; col++) {
-    //keeps track of amount of merges, and keeps you from combining with something that's already been combined
+    //handles the merging of the tiles
     let merges = 0;
-    for(let i = 1; i < grid.length; i++) {
-      //if the specific value in this specific column/row isn't null (empty)
-      if(grid[i][col] != null) {
-        //store this value
-        let value = grid[i][col];
-        //remove this slot from the grid
+    let i = 1;
+    while(i < grid.length) {
+      let value = grid[i][col];
+      let index = i - 1;
+      while(index > merges && grid[index][col] == null) {
+        index--;
+      }
+      if(grid[index][col] == grid[i][col] && grid[index][col] != null) {
+        //change the number you hit to 2x its value
+        grid[index][col] = value*2;
+        //remove the starter number, it will now be merged into set[index]
         grid[i][col] = null;
-        //store a variable that, for now, references the next value over
+        //increase merges so that we don't check a slot we already merged
+        merges = i;
+      }
+      i++;
+    }
+    //handles moving the tiles correctly
+    for(let i = 0; i < grid.length; i++) {
+      //if the current slot has a value inside...
+      if(grid[i][col] != null) {
+        //store its value, and make that slot null.
+        let value = grid[i][col];
+        grid[i][col] = null;
         let index = i - 1;
-        //decrement index until you find another number in the column/row, or till you hit the end
-        while(index > merges && grid[index][col] == null) {
+        /*loop downwards until you either hit the beginning of the row or you hit
+        a non-null value.*/
+        while(index >= 0 && grid[index][col] == null) {
+          //decrease index
           index--;
         }
-        //if the next closest tile = value
-        if(grid[index][col] == value) {
-          //make the grid[index][col] tile equal to 2x the value of value
-          let newVal = value*2;
-          grid[index][col] = newVal;
-          //increment merge by 1, to keep you from being able to merge on to that tile
-          merges++;
-        }
-        //if there's a number here but it's not the same as ours, put our number in the first available slot
-        else if(typeof grid[index][col] == 'number'){
-          grid[index+1][col] = value;
-        }
-        //otherwise, put the value in the spot we're looking at
-        else {
-          grid[index][col] = value;
-        }
+        grid[index+1][col] = value;
       }
     }
   }
@@ -171,35 +174,39 @@ const moveDown = () => {
   for(let col = 0; col < 4; col++) {
     //keeps track of amount of merges, and keeps you from combining with something that's already been combined
     let merges = 0;
-    for(let i = grid.length - 2; i >= 0; i--) {
-      //if the specific value in this specific column/row isn't null (empty)
-      if(grid[i][col] != null) {
-        //store this value
-        let value = grid[i][col];
-        //remove this slot from the grid
+    let i = 2;
+    while(i >= 0) {
+      let value = grid[i][col];
+      let index = i + 1;
+      while(index < (grid.length-2) - merges && grid[index][col] == null) {
+        index++;
+      }
+      if(grid[index][col] == grid[i][col] && grid[index][col] != null) {
+        //change the number you hit to 2x its value
+        grid[index][col] = value*2;
+        //remove the starter number, it will now be merged into set[index]
         grid[i][col] = null;
-        //store a variable that, for now, references the next value over
+        //increase merges so that we don't check a slot we already merged
+        merges = i;
+      }
+      i--;
+    }
+
+    //handles moving the tiles correctly
+    for(let i = grid.length - 1; i >= 0; i--) {
+      //if the current slot has a value inside...
+      if(grid[i][col] != null) {
+        //store its value, and make that slot null.
+        let value = grid[i][col];
+        grid[i][col] = null;
         let index = i + 1;
-        //decrement index until you find another number in the column/row, or till you hit the end
-        while(index < (grid.length-1) - merges && grid[index][col] == null) {
+        /*loop downwards until you either hit the beginning of the row or you hit
+        a non-null value.*/
+        while(index <= 3 && grid[index][col] == null) {
+          //decrease index
           index++;
         }
-        //if the next closest tile = value
-        if(grid[index][col] == value) {
-          //make the grid[index][col] tile equal to 2x the value of value
-          let newVal = value*2;
-          grid[index][col] = newVal;
-          //increment merge by 1, to keep you from being able to merge on to that tile
-          merges++;
-        }
-        //if there's a number here but it's not the same as ours, put our number in the first available slot
-        else if(typeof grid[index][col] == 'number'){
-          grid[index-1][col] = value;
-        }
-        //otherwise, put the value in the spot we're looking at
-        else {
-          grid[index][col] = value;
-        }
+        grid[index-1][col] = value;
       }
     }
   }
@@ -274,20 +281,20 @@ const mergeTiles = (set, direction) => {
         //remove the starter number, it will now be merged into set[index]
         set[i] = null;
         //increase merges so that we don't check a slot we already merged
-        merges++;
+        merges = i;
       }
       //increment
       i++;
     }
-    //return the number of merges you made in that row
-    return merges;
+    //return the new, unmoved array
+    return set;
   }
   else {
     //i is set to 1 so that the first value you look at has a slot next to it
     let i = 2;
     //will count the # of merges done
     let merges = 0;
-    while(i > 0) {
+    while(i >= 0) {
       //look at the next closest slot to the current one
       let index = i + 1;
       let value = set[i];
@@ -302,15 +309,17 @@ const mergeTiles = (set, direction) => {
         //remove the starter number, it will now be merged into set[index]
         set[i] = null;
         //increase merges so that we don't check a slot we already merged
-        merges++;
+        merges = i;
       }
       //increment
       i--;
     }
-    //return the number of merges you made in that row
-    return merges;
+    //return the new, unmoved (but combined) array
+    return set;
   }
 }
+//only bug left is that, when a row/column is full and the 2 middle numbers are equal to the last number in the grid, they'll all 3 combine
+//I think this has to do with the merges workaround only ignoring the value in the first slot, and not the value in the 2nd or the 3rd slots
 
 module.exports = {
   createGrid,
