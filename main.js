@@ -244,6 +244,9 @@ const moveUp = () => {
   addScore();
   spawnRandomTile();
   updateGrid();
+  if(checkLoss(grid)) {
+    playable = false;
+  }
 }
 
 const moveDown = () => {
@@ -296,6 +299,9 @@ const moveDown = () => {
   addScore();
   spawnRandomTile();
   updateGrid();
+  if(checkLoss(grid)) {
+    playable = false;
+  }
 }
 
 const moveLeft = () => {
@@ -327,6 +333,9 @@ const moveLeft = () => {
 //  boop();
   spawnRandomTile();
   updateGrid();
+  if(checkLoss(grid)) {
+    playable = false;
+  }
 }
 
 const moveRight = () => {
@@ -352,6 +361,9 @@ const moveRight = () => {
 //  boop();
   spawnRandomTile();
   updateGrid();
+  if(checkLoss(grid)) {
+    playable = false;
+  }
 }
 //we might have to have a separate function to get the array for merged tiles first
 const mergeTiles = (set, direction) => {
@@ -487,6 +499,7 @@ const checkLoss = (arr) => {
 
     }
   }
+  gameMessage.innerHTML= "Loss";
   return true;
 }
 
