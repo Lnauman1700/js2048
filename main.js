@@ -423,6 +423,9 @@ const mergeTiles = (set, direction) => {
 }
 //only bug left is that, when a column is full and the 2 middle numbers are equal to the last number in the grid, they'll all 3 combine. ONLY WHEN YOU MOVE DOWN
 //I think this has to do with the merges workaround only ignoring the value in the first slot, and not the value in the 2nd or the 3rd slots
+const checkLoss = (arr) => {
+  
+}
 
 module.exports = {
   createGrid,
