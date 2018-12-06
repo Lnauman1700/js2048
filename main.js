@@ -3,7 +3,6 @@ let playable;
 let score;
 let scoreAdd;
 const gameMessage = document.getElementById('gamemessage');
-const scoreBoard = document.getElementById('scorebox');
 
 function beep() {
     var snd = new Audio("./sound/merge.wav");
@@ -23,6 +22,7 @@ function sleep(ms) {
 }
 //Create Score
 const addScore = (score,scoreAdd) =>{
+  const scoreBoard = document.getElementById('scorebox');
   scoreBoard.innerHTML = `Score: ${score}`;
   score += scoreAdd;
   return score;
@@ -192,6 +192,7 @@ const spawnRandomTile=()=>{
     }
 }
 spawnRandomTile();
+spawnRandomTile();
 //End Spawn Tiles
 
 //Movement
@@ -216,6 +217,7 @@ const moveUp = () => {
         grid[index][col] = value*2;
         scoreAdd = value*2;
         score += scoreAdd;
+        beep();
         //remove the starter number, it will now be merged into set[index]
         grid[i][col] = null;
         //increase merges so that we don't check a slot we already merged
@@ -241,7 +243,7 @@ const moveUp = () => {
       }
     }
   }
-//  boop();
+  boop();
   addScore(score,scoreAdd);
   spawnRandomTile();
   updateGrid();
@@ -267,6 +269,7 @@ const moveDown = () => {
         grid[index][col] = value*2;
         scoreAdd = value*2;
         score += scoreAdd;
+        beep();
         //remove the starter number, it will now be merged into set[index]
         grid[i][col] = null;
         //increase merges so that we don't check a slot we already merged
@@ -293,7 +296,7 @@ const moveDown = () => {
       }
     }
   }
-//  boop();
+  boop();
   addScore(score,scoreAdd);
   spawnRandomTile();
   updateGrid();
@@ -325,7 +328,7 @@ const moveLeft = () => {
       }
     }
   }
-//  boop();
+  boop();
   spawnRandomTile();
   updateGrid();
 }
@@ -350,7 +353,7 @@ const moveRight = () => {
       }
     }
   }
-//  boop();
+  boop();
   spawnRandomTile();
   updateGrid();
 }
@@ -375,7 +378,7 @@ const mergeTiles = (set, direction) => {
         set[index] = value*2;
         scoreAdd = value*2;
         score += scoreAdd;
-        console.log(scoreAdd);
+        beep();
         //remove the starter number, it will now be merged into set[index]
         set[i] = null;
         //increase merges so that we don't check a slot we already merged
@@ -408,7 +411,7 @@ const mergeTiles = (set, direction) => {
         set[index] = value*2;
         scoreAdd = value*2;
         score += scoreAdd;
-        console.log(scoreAdd);
+        beep();
         //remove the starter number, it will now be merged into set[index]
         set[i] = null;
         //increase merges so that we don't check a slot we already merged
