@@ -9,8 +9,15 @@ const {
   spawnRandomTile,
   getGrid,
   changeTile,
-
+  addScore,
 } = require("./main");
+
+describe ('addScore()', ()=>{
+  test('When tiles merge, the merged tile sum should be added to the score',()=>{
+    expect(addScore(10,16)).toEqual(26);
+    expect(addScore(null,64)).toEqual(64);
+  });
+});
 
 describe('createGrid()', () => {
 

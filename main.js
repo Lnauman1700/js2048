@@ -22,9 +22,10 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 //Create Score
-const addScore = () =>{
+const addScore = (score,scoreAdd) =>{
   scoreBoard.innerHTML = `Score: ${score}`;
-
+  score += scoreAdd;
+  return score;
 }
 //End Create Score
 //fills grid with all null values.
@@ -38,7 +39,7 @@ const createGrid = () => {
   playable= true;
   score = 0;
   scoreAdd = 0;
-  addScore();
+  addScore(score,scoreAdd);
   return grid;
 }
 createGrid();
@@ -241,7 +242,7 @@ const moveUp = () => {
     }
   }
 //  boop();
-  addScore();
+  addScore(score,scoreAdd);
   spawnRandomTile();
   updateGrid();
 }
@@ -293,7 +294,7 @@ const moveDown = () => {
     }
   }
 //  boop();
-  addScore();
+  addScore(score,scoreAdd);
   spawnRandomTile();
   updateGrid();
 }
@@ -385,7 +386,7 @@ const mergeTiles = (set, direction) => {
       i++;
     }
     //return the new, unmoved array
-    addScore();
+    addScore(score,scoreAdd);
     return set;
   }
   else {
@@ -417,7 +418,7 @@ const mergeTiles = (set, direction) => {
       i--;
     }
     //return the new, unmoved (but combined) array
-    addScore();
+    addScore(score,scoreAdd);
     return set;
   }
 }
@@ -435,4 +436,5 @@ module.exports = {
   spawnRandomTile,
   getGrid,
   changeTile,
+  addScore,
 };
