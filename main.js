@@ -23,7 +23,7 @@ function sleep(ms) {
 }
 //Create Score
 const addScore = () => {
-  scoreBoard.innerHTML = `Score: ${score}`;
+  //scoreBoard.innerHTML = `Score: ${score}`;
 
 }
 //End Create Score
@@ -72,7 +72,7 @@ function checkWin(arr) {
   if (winCount == 1){
     playable = false;
     //sleep(500);
-    gameMessage.innerHTML= "Win";
+    //gameMessage.innerHTML= "Win";
     //alert("You Win.");
     return true;
   } else {
@@ -499,7 +499,7 @@ const checkLoss = (arr) => {
 
     }
   }
-  gameMessage.innerHTML= "Loss";
+  //gameMessage.innerHTML= "Loss";
   return true;
 }
 

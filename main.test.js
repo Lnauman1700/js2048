@@ -367,9 +367,8 @@ describe('checkLoss()', () => {
   });
   test('when the board is full but like tiles are next to eachother, checkLoss() returns false', () => {
     createGrid();
-    let preGrid = getGrid();
-    for(let i = 0; i < preGrid.length; i++) {
-      for(let n = 0; n < preGrid[i].length; i++) {
+    for(let i = 0; i < 4; i++) {
+      for(let n = 0; n < 4; i++) {
         changeTile(i,n,2);
       }
     }
@@ -392,5 +391,46 @@ describe('checkLoss()', () => {
     }
     let grid = getGrid();
     expect(checkLoss(grid)).toBe(true);
+  });
+});
+
+describe('getGrid()', () => {
+
+  test('accurately displays the current state of the grid array after no changes have been made', () => {
+    createGrid();
+    expect(getGrid()).toEqual([
+      [null,null,null,null],
+      [null,null,null,null],
+      [null,null,null,null],
+      [null,null,null,null]
+    ])
+  });
+  test('accurately displays the current state of the grid array after specific tiles have been placed', () => {
+    createGrid();
+    changeTile(0,0,2);
+    changeTile(0,1,2);
+    expect(getGrid()).toEqual([
+      [2,2,null,null],
+      [null,null,null,null],
+      [null,null,null,null],
+      [null,null,null,null]
+    ]);
+  });
+});
+
+describe('changeTile()', () => {
+  test('returns the value that was sent in to the grid', () => {
+    createGrid();
+    expect(changeTile(0,0,2)).toEqual(2);
+  });
+  test('changes the grid in the specified slot, to the specified value', () => {
+    createGrid();
+    changeTile(0,0,2);
+    expect(getGrid()).toEqual([
+      [2,null,null,null],
+      [null,null,null,null],
+      [null,null,null,null],
+      [null,null,null,null]
+    ]);
   });
 });
