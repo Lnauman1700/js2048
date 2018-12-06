@@ -9,6 +9,8 @@ const {
   spawnRandomTile,
   getGrid,
   changeTile,
+  checkLoss,
+  addScore,
 
 } = require("./main");
 
@@ -358,12 +360,37 @@ describe('mergeTiles()', () => {
 describe('checkLoss()', () => {
 
   test('when the board is not full, checkLoss() returns false', () => {
-
+    createGrid();
+    changeTile(0,0,2);
+    let currentGrid = getGrid();
+    expect(checkLoss(currentGrid)).toBe(false);
   });
   test('when the board is full but like tiles are next to eachother, checkLoss() returns false', () => {
-
+    createGrid();
+    let preGrid = getGrid();
+    for(let i = 0; i < preGrid.length; i++) {
+      for(let n = 0; n < preGrid[i].length; i++) {
+        changeTile(i,n,2);
+      }
+    }
+    let postGrid = getGrid();
+    expect(checkLoss(postGrid)).toBe(false);
   });
-  test('when the board is full and there are no like tiles next to eachother, checkLoss() returns true', () => {
-
+  test('when the board is completely empty, return false', () => {
+    createGrid();
+    let grid = getGrid();
+    expect(checkLoss(grid)).toBe(false);
+  });
+  test('when the board is full and there are no like tiles next to eachother, checkLoss(grid) returns true', () => {
+    createGrid();
+    let value = 1;
+    for(let i = 0; i < 4; i++) {
+      for(let n = 0; n < 4; n++) {
+        changeTile(i, n, value);
+        value++;
+      }
+    }
+    let grid = getGrid();
+    expect(checkLoss(grid)).toBe(true);
   });
 });

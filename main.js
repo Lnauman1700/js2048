@@ -22,7 +22,7 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 //Create Score
-const addScore = () =>{
+const addScore = () => {
   scoreBoard.innerHTML = `Score: ${score}`;
 
 }
@@ -423,8 +423,71 @@ const mergeTiles = (set, direction) => {
 }
 //only bug left is that, when a column is full and the 2 middle numbers are equal to the last number in the grid, they'll all 3 combine. ONLY WHEN YOU MOVE DOWN
 //I think this has to do with the merges workaround only ignoring the value in the first slot, and not the value in the 2nd or the 3rd slots
+
+//takes one parameter, which should be a 2d array, and checks to see if the current state of the arr results in a loss
 const checkLoss = (arr) => {
-  
+
+  //check to see if there are any spaces without values in them
+  for(let row of arr) {
+    if(row.includes(null)){
+      return false;
+    }
+  }
+  //next, we need to see if any of the slots have at least 1 similar number next to them
+  let lossArrs = [[arr[0][0], arr[1][0], arr[0][1]], ]
+  for(let r = 0; r < arr.length; r++) {
+    let tempArr = [];
+    for(let c = 0; c < arr[r].length; c++) {
+      let current = arr[r][c];
+      let leftValue;
+      let rightValue;
+      let topValue;
+      let bottomValue;
+
+      try {
+        leftValue = arr[r][c-1];
+      }
+      catch(e) {
+        leftValue = undefined;
+      }
+
+      try {
+        rightValue = arr[r][c+1];
+      }
+      catch(e) {
+        leftValue = undefined;
+      }
+
+      try {
+        topValue = arr[r-1][c];
+      }
+      catch(e) {
+        topValue = undefined;
+      }
+
+      try {
+        bottomValue = arr[r+1][c];
+      }
+      catch(e) {
+        bottomValue = undefined;
+      }
+
+      if(current == leftValue && leftValue != undefined) {
+        return false;
+      }
+      if(current == rightValue && rightValue != undefined) {
+        return false;
+      }
+      if(current == topValue && topValue != undefined) {
+        return false;
+      }
+      if(current == bottomValue && bottomValue != undefined) {
+        return false;
+      }
+
+    }
+  }
+  return true;
 }
 
 module.exports = {
@@ -438,4 +501,6 @@ module.exports = {
   spawnRandomTile,
   getGrid,
   changeTile,
+  checkLoss,
+  addScore,
 };
