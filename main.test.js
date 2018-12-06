@@ -123,6 +123,72 @@ describe('moveUp()', () => {
   });
 });
 
+describe('moveRight()', () => {
+
+  test('moves a single tile right, so that it appears in the righmost column.', () => {
+    createGrid();
+    changeTile(1,0,4);
+    updateGrid();
+
+    moveRight();
+    let current = getGrid();
+    expect(current[1][3]).toBe(4);
+  });
+
+  test('combines 2 adjacent slots going right', () => {
+    createGrid();
+    changeTile(0,0,2);
+    changeTile(0,1,2);
+    moveRight();
+    let current = getGrid();
+
+    expect(current[0][3]).toBe(4);
+  });
+
+  test('combines 2 non-adjacent slots going right', () => {
+    createGrid();
+    changeTile(0,0,2);
+    changeTile(0,2,2);
+    moveRight();
+    let current = getGrid();
+
+    expect(current[0][3]).toBe(4);
+  });
+
+  test('doesnt combine 2 unreleated numbers with eachother', () => {
+    createGrid();
+    changeTile(0,0,2);
+    changeTile(0,1,4);
+    moveRight();
+    let current = getGrid();
+
+    expect(current[0][3]).toBe(4) && expect(current[0][2]).toBe(2);
+  });
+
+  test('doesnt combine a newly-combined slot with an equal-numbered slot', () => {
+    createGrid();
+    changeTile(0,2,2);
+    changeTile(0,3,2);
+    changeTile(0,0,4);
+    moveRight();
+    let current = getGrid();
+
+    expect(current[0][3]).toBe(4) && expect(current[0][2]).toBe(4);
+  });
+
+  test('combines a full row of same-numbered slots into 2 new slots of the same value', () => {
+    createGrid();
+    changeTile(0,0,2);
+    changeTile(0,1,2);
+    changeTile(0,2,2);
+    changeTile(0,3,2);
+    moveRight();
+    let current = getGrid();
+
+    expect(current[0][3]).toBe(4) && expect(current[0][2]).toBe(4);
+  });
+});
+
 describe('moveDown()', () => {
 
   test('moves a single tile down, so that it appears in the bottom row.', () => {
@@ -194,5 +260,110 @@ describe('moveDown()', () => {
     let current = getGrid();
 
     expect(current[3][0]).toBe(4) && expect(current[2][0]).toBe(4);
+  });
+});
+
+describe('moveLeft()', () => {
+
+  test('moves a single tile left, so that it appears in the leftmost column.', () => {
+    createGrid();
+    changeTile(0,3,4);
+    updateGrid();
+
+    moveLeft();
+    let current = getGrid();
+    expect(current[0][0]).toBe(4);
+  });
+
+  test('combines 2 adjacent slots going right', () => {
+    createGrid();
+    changeTile(0,2,2);
+    changeTile(0,3,2);
+    moveLeft();
+    let current = getGrid();
+
+    expect(current[0][0]).toBe(4);
+  });
+
+  test('combines 2 non-adjacent slots going right', () => {
+    createGrid();
+    changeTile(0,1,2);
+    changeTile(0,3,2);
+    moveLeft();
+    let current = getGrid();
+
+    expect(current[0][0]).toBe(4);
+  });
+
+  test('doesnt combine 2 unreleated numbers with eachother', () => {
+    createGrid();
+    changeTile(0,0,2);
+    changeTile(0,1,4);
+    moveLeft();
+    let current = getGrid();
+
+    expect(current[0][1]).toBe(4) && expect(current[0][0]).toBe(2);
+  });
+
+  test('doesnt combine a newly-combined slot with an equal-numbered slot', () => {
+    createGrid();
+    changeTile(0,0,2);
+    changeTile(0,1,2);
+    changeTile(0,3,4);
+    moveLeft();
+    let current = getGrid();
+
+    expect(current[0][0]).toBe(4) && expect(current[0][1]).toBe(4);
+  });
+
+  test('combines a full row of same-numbered slots into 2 new slots of the same value', () => {
+    createGrid();
+    changeTile(0,0,2);
+    changeTile(0,1,2);
+    changeTile(0,2,2);
+    changeTile(0,3,2);
+    moveLeft();
+    let current = getGrid();
+
+    expect(current[0][0]).toBe(4) && expect(current[0][1]).toBe(4);
+  });
+});
+
+describe('mergeTiles()', () => {
+
+  test('correctly merges tiles in a chain going left', () => {
+    createGrid();
+    changeTile(0,0,4);
+    changeTile(0,1,2);
+    changeTile(0,2,2);
+    changeTile(0,3,2);
+    let preMerge = getGrid();
+    mergeTiles(preMerge[0], "left");
+    let postMerge = getGrid();
+    expect(postMerge[0]).toEqual([4,4,null,2]);
+  });
+  test('correctly merges tiles in a chain going right', () => {
+    createGrid();
+    changeTile(0,0,4);
+    changeTile(0,1,2);
+    changeTile(0,2,2);
+    changeTile(0,3,2);
+    let preMerge = getGrid();
+    mergeTiles(preMerge[0], "right");
+    let postMerge = getGrid();
+    expect(postMerge[0]).toEqual([4,2,null,4]);
+  });
+});
+
+describe('checkLoss()', () => {
+
+  test('when the board is not full, checkLoss() returns false', () => {
+
+  });
+  test('when the board is full but like tiles are next to eachother, checkLoss() returns false', () => {
+
+  });
+  test('when the board is full and there are no like tiles next to eachother, checkLoss() returns true', () => {
+
   });
 });
