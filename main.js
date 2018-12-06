@@ -29,13 +29,12 @@ const addScore = () =>{
 //End Create Score
 //fills grid with all null values.
 const createGrid = () => {
-  for(let i = 0; i < 4; i++) {
-    let row = [];
-    for(let n = 0; n < 4; n++) {
-      row.push(null);
-    }
-    grid.push(row);
-  }
+  grid = [
+    [null, null, null, null],
+    [null, null, null, null],
+    [null, null, null, null],
+    [null, null, null, null]
+  ]
   playable= true;
   score = 0;
   scoreAdd = 0;
@@ -43,6 +42,16 @@ const createGrid = () => {
   return grid;
 }
 createGrid();
+
+
+const getGrid = () => {
+  return grid;
+}
+
+const changeTile = (x, y, value) => {
+  grid[x][y] = value;
+  return grid[x][y];
+}
 
 //Check //
 function checkWin(arr) {
@@ -422,4 +431,8 @@ module.exports = {
   moveDown,
   moveLeft,
   moveRight,
+  mergeTiles,
+  spawnRandomTile,
+  getGrid,
+  changeTile,
 };
