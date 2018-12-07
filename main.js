@@ -446,7 +446,6 @@ const checkLoss = (arr) => {
     }
   }
   //next, we need to see if any of the slots have at least 1 similar number next to them
-  let lossArrs = [[arr[0][0], arr[1][0], arr[0][1]], ]
   for(let r = 0; r < arr.length; r++) {
     let tempArr = [];
     for(let c = 0; c < arr[r].length; c++) {
@@ -456,6 +455,7 @@ const checkLoss = (arr) => {
       let topValue;
       let bottomValue;
 
+      //if we run into an error value, we'll reassign it to be undefined.
       try {
         leftValue = arr[r][c-1];
       }
