@@ -9,6 +9,8 @@ const {
   spawnRandomTile,
   getGrid,
   changeTile,
+  checkLoss,
+  addScore,
 
 } = require("./main");
 
@@ -358,12 +360,76 @@ describe('mergeTiles()', () => {
 describe('checkLoss()', () => {
 
   test('when the board is not full, checkLoss() returns false', () => {
-
+    createGrid();
+    changeTile(0,0,2);
+    let currentGrid = getGrid();
+    expect(checkLoss(currentGrid)).toBe(false);
   });
-  test('when the board is full but like tiles are next to eachother, checkLoss() returns false', () => {
-
+  /*test('when the board is full but like tiles are next to eachother, checkLoss() returns false', () => {
+    createGrid();
+    for(let i = 0; i < 4; i++) {
+      for(let n = 0; n < 4; i++) {
+        changeTile(i,n,2)
+      }
+    }
+    let currentGrid = getGrid();
+    expect(checkLoss(currentGrid)).toBe(false);
+  });*/
+  test('when the board is completely empty, return false', () => {
+    createGrid();
+    let grid = getGrid();
+    expect(checkLoss(grid)).toBe(false);
   });
-  test('when the board is full and there are no like tiles next to eachother, checkLoss() returns true', () => {
+  test('when the board is full and there are no like tiles next to eachother, checkLoss(grid) returns true', () => {
+    createGrid();
+    let value = 1;
+    for(let i = 0; i < 4; i++) {
+      for(let n = 0; n < 4; n++) {
+        changeTile(i,n,value);
+        value++;
+      }
+    }
+    expect(checkLoss(getGrid())).toBe(true);
+  });
+});
 
+describe('getGrid()', () => {
+
+  test('accurately displays the current state of the grid array after no changes have been made', () => {
+    createGrid();
+    expect(getGrid()).toEqual([
+      [null,null,null,null],
+      [null,null,null,null],
+      [null,null,null,null],
+      [null,null,null,null]
+    ])
+  });
+  test('accurately displays the current state of the grid array after specific tiles have been placed', () => {
+    createGrid();
+    changeTile(0,0,2);
+    changeTile(0,1,2);
+    expect(getGrid()).toEqual([
+      [2,2,null,null],
+      [null,null,null,null],
+      [null,null,null,null],
+      [null,null,null,null]
+    ]);
+  });
+});
+
+describe('changeTile()', () => {
+  test('returns the value that was sent in to the grid', () => {
+    createGrid();
+    expect(changeTile(0,0,2)).toEqual(2);
+  });
+  test('changes the grid in the specified slot, to the specified value', () => {
+    createGrid();
+    changeTile(0,0,2);
+    expect(getGrid()).toEqual([
+      [2,null,null,null],
+      [null,null,null,null],
+      [null,null,null,null],
+      [null,null,null,null]
+    ]);
   });
 });
