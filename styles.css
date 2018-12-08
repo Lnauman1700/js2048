@@ -3,13 +3,13 @@
   src: url("Transist.ttf") format("ttf"),
 }
 body{
-  background: black;
+  background: darkgrey;
   color: black;
   font-family: 'Transistor';
 }
 table{
   position: relative;
-  top: -340px;
+  top: -380px;
   margin: auto;
   padding: 0;
   filter: drop-shadow(0 1px 1px #333);
@@ -42,6 +42,19 @@ table{
     height: 350px;
     width: 350px;
   }
+  .screenwrapper{
+    z-index: -100;
+    background: black;
+    height: 400px;
+    width: 400px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 60px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .gamemsgwrapper{
     margin: auto;
     position: relative;
@@ -61,3 +74,61 @@ table{
   #gamemessage{
     text-align: right;
   }
+  .buttonwrapper{
+    margin: auto;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 320px;
+    height: 20px;
+    border: 1px solid black;
+    padding: 10px;
+  }
+  .circlebutton{
+    background-color: red;
+    border-top: 2px solid #c60000;
+    border-right: 3px solid maroon;
+    border-left: 3px solid maroon;
+    border-bottom: 4px solid #600000;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+.buttontext{
+  display: inline;
+  font-family: sans-serif;
+  color: white;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+.halfed{
+  display: inline-block;
+  top: -10px;
+  width: 50%;
+}
+.controlpad{
+  height: 100px;
+  /* display:flex;
+  align-self: center; */
+}
+.directionbutton{
+  background-color: red;
+  border-top: 2px solid #c60000;
+  border-right: 3px solid maroon;
+  border-left: 3px solid maroon;
+  border-bottom: 4px solid #600000;
+  border-radius: 50%;
+}
+.updownbutton{
+  display:block;
+  align-items: space-around;
+  height: 20px;
+  width: 10px;
+  margin: auto;
+}
+.leftrightbutton{
+  align-items: center;
+  width: 20px;
+  height: 10px;
+}

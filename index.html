@@ -8,10 +8,22 @@
   <body>
     <script defer src="main.js"></script>
       <h1>2048</h1>
+    <div class="screenwrapper"></div>
     <div class="backgrounddiv"></div>
     <div class="gamemsgwrapper">
       <div id="scorebox"></div>
       <div id="gamemessage"></div>
+    </div>
+    <div class="buttonwrapper">
+        <div class="buttonwrapper halfed">
+          <div class="circlebutton" onclick="restartGame()"></div><div class="buttontext">RESET</div>
+        </div>
+
+        <div class="buttonwrapper halfed controlpad">
+          <div class="directionbutton updownbutton"></div><br />
+          <div class="directionbutton leftrightbutton"></div><div class="directionbutton leftrightbutton"></div><br />
+          <div class="directionbutton updownbutton"></div>
+        </div>
     </div>
   </body>
 </html>

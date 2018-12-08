@@ -505,6 +505,12 @@ const checkLoss = (arr) => {
   return true;
 }
 
+const restartGame = () =>{
+  createGrid();
+  spawnRandomTile();
+  updateGrid();
+}
+
 module.exports = {
   createGrid,
   updateGrid,
