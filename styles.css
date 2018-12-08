@@ -81,7 +81,6 @@ table{
     justify-content: space-between;
     width: 320px;
     height: 20px;
-    border: 1px solid black;
     padding: 10px;
   }
   .circlebutton{
@@ -94,6 +93,7 @@ table{
     width: 10px;
     border-radius: 50%;
     display: inline-block;
+    cursor: pointer;
   }
 .buttontext{
   display: inline;
@@ -126,9 +126,30 @@ table{
   height: 20px;
   width: 10px;
   margin: auto;
+  cursor: pointer;
 }
 .leftrightbutton{
-  align-items: center;
+  display: flex;
+  align-items: space-between;
   width: 20px;
   height: 10px;
+  max-height: 10px;
+  padding-bottom: 3px;
+  cursor: pointer;
+}
+.leftrightwrapper{
+  width: 80px;
+  max-width: 80px;
+}
+.consolebg{
+  height: 80vh;
+  width: 60vw;
+  background: powderblue;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: -11;
 }
