@@ -3,7 +3,7 @@
   src: url("Transist.ttf") format("ttf"),
 }
 body{
-  background: darkgrey;
+  background: black;
   color: black;
   font-family: 'Transistor';
 }
@@ -41,6 +41,7 @@ table{
     top: 10px;
     height: 350px;
     width: 350px;
+    box-shadow: inset 0px 5px 10px rgba(0,0,0,0.5);
   }
   .screenwrapper{
     z-index: -100;
@@ -119,6 +120,7 @@ table{
   border-left: 3px solid maroon;
   border-bottom: 4px solid #600000;
   border-radius: 50%;
+  font-size: 90%;
 }
 .updownbutton{
   display:block;
@@ -142,14 +144,16 @@ table{
   max-width: 80px;
 }
 .consolebg{
-  height: 80vh;
-  width: 60vw;
-  background: powderblue;
+  height: 800px;
+  width: 500px;
+  background: purple;
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
+  top: 3vh;
   margin-left: auto;
   margin-right: auto;
-  z-index: -11;
+  z-index: -99999;
+  border-radius: 30px 30px 90px 30px;
+  box-shadow: inset 0px -10px 10px rgba(0,0,0,0.7);
 }
