@@ -3,7 +3,7 @@
   src: url("Transist.ttf") format("ttf"),
 }
 body{
-  background: navy;
+  background: black;
   color: black;
   font-family: 'Transistor';
 }
@@ -173,14 +173,29 @@ table{
   box-shadow: inset -5px -10px 25px rgba(0,0,0,0.85);
 }
 .speaker{
+  background: url('./speakergrid.png');
   margin: auto;
   position: absolute;
   left:-230px;
-  bottom:180px;
   right: 0;
+  top:600px;
   height: 150px;
   max-height: 150px;
   width:150px;
   max-width:150px;
-  border: 1px solid black;
+}
+.credittext{
+  position: absolute;
+  margin: auto;
+  right: 0;
+  top:650px;
+  left: 180px;
+  width: 200px;
+  max-width: 200px;
+  height: auto;
+}
+.credittext p{
+  font-family: sans-serif;
+  margin-top: -20px;
+  filter: none;
 }
