@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- help- Danny -->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -8,30 +9,34 @@
   <body>
     <script defer src="main.js"></script>
       <h1>2048</h1>
-      <!-- D I V  H E L L -->
+      <!-- D I V  H E L L - D A N N Y-->
     <div class="screenwrapper"></div>
     <div class="backgrounddiv"></div>
     <div class="gamemsgwrapper">
       <div id="scorebox"></div>
       <div id="gamemessage"></div>
     </div>
-    <!-- Game Controller Div Nightmare -->
+    <!-- Game Controller Div Nightmare- Danny -->
     <div class="buttonwrapper">
         <div class="buttonwrapper halfed">
           <div class="circlebutton" onclick="restartGame()"></div><div class="buttontext">RESET</div>
         </div>
 
         <div class="buttonwrapper halfed controlpad">
-          <div class="directionbutton updownbutton" onclick="moveUp();">▲</div>
+          <div class="directionbutton updownbutton upbutton" onclick="moveUp();">◄</div>
             <div class="buttonwrapper leftrightwrapper">
-          <div class="directionbutton leftrightbutton" onclick="moveLeft();">◄</div><div class="directionbutton leftrightbutton" onclick="moveRight();">►</div>
+          <div class="directionbutton leftrightbutton" onclick="moveLeft();">◄</div><div class="directionbutton leftrightbutton rightbutton" onclick="moveRight();">◄</div>
             </div>
-          <div class="directionbutton updownbutton" onclick="moveDown()">▼</div>
+          <div class="directionbutton updownbutton downbutton" onclick="moveDown()">◄</div>
         </div>
     </div>
-    <!-- End Game Controller -->
+    <!-- End Game Controller- Danny -->
 
-    <!-- Console background -->
+    <!-- Console background- Danny I have not properly slept in 2 weeks -->
     <div class="consolebg"></div>
+    <div class="speaker"><img src="speakergrid.png"></div>
+    <div class="credittext"><p>Developed by</p>
+    <p>Lucas N.</p>
+    <p>Danny L.</p></div>
   </body>
 </html>

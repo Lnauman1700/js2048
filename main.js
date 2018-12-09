@@ -48,6 +48,7 @@ const createGrid = () => {
   playable= true;
   score = 0;
   scoreAdd = 0;
+  gameMessage.innerHTML = " ";
   addScore();
   return grid;
 }
