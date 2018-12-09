@@ -8,10 +8,30 @@
   <body>
     <script defer src="main.js"></script>
       <h1>2048</h1>
+      <!-- D I V  H E L L -->
+    <div class="screenwrapper"></div>
     <div class="backgrounddiv"></div>
     <div class="gamemsgwrapper">
       <div id="scorebox"></div>
       <div id="gamemessage"></div>
     </div>
+    <!-- Game Controller Div Nightmare -->
+    <div class="buttonwrapper">
+        <div class="buttonwrapper halfed">
+          <div class="circlebutton" onclick="restartGame()"></div><div class="buttontext">RESET</div>
+        </div>
+
+        <div class="buttonwrapper halfed controlpad">
+          <div class="directionbutton updownbutton" onclick="moveUp();">▲</div>
+            <div class="buttonwrapper leftrightwrapper">
+          <div class="directionbutton leftrightbutton" onclick="moveLeft();">◄</div><div class="directionbutton leftrightbutton" onclick="moveRight();">►</div>
+            </div>
+          <div class="directionbutton updownbutton" onclick="moveDown()">▼</div>
+        </div>
+    </div>
+    <!-- End Game Controller -->
+
+    <!-- Console background -->
+    <div class="consolebg"></div>
   </body>
 </html>

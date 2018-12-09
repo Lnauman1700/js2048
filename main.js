@@ -4,12 +4,22 @@ let score;
 let scoreAdd;
 const gameMessage = document.getElementById('gamemessage');
 const scoreBoard = document.getElementById('scorebox');
+let beepCoolDown= false;
 
 function beep() {
-    var snd = new Audio("./sound/merge.wav");
+    if (beepCoolDown == true){
+
+    } else {
+      var snd = new Audio("./sound/merge.wav");
+      snd.play();
+      beepCoolDown=true;
+      setTimeout(function(){ beepCoolDown=false; }, 50);
+    }
+}
+function bwah() {
+    var snd = new Audio("./sound/lost.wav");
     snd.play();
 }
-
 function boop() {
     var snd = new Audio("./sound/move.wav");
     snd.play();
@@ -73,6 +83,7 @@ function checkWin(arr) {
     playable = false;
     //sleep(500);
     gameMessage.innerHTML= "Win";
+    blip();
     //alert("You Win.");
     return true;
   } else {
@@ -215,6 +226,7 @@ const moveUp = () => {
         grid[index][col] = value*2;
         scoreAdd = value*2;
         score += scoreAdd;
+        beep();
         //remove the starter number, it will now be merged into set[index]
         grid[i][col] = null;
         //increase merges so that we don't check a slot we already merged
@@ -240,7 +252,7 @@ const moveUp = () => {
       }
     }
   }
-//  boop();
+  boop();
   addScore();
   spawnRandomTile();
   updateGrid();
@@ -269,6 +281,7 @@ const moveDown = () => {
         grid[index][col] = value*2;
         scoreAdd = value*2;
         score += scoreAdd;
+        beep();
         //remove the starter number, it will now be merged into set[index]
         grid[i][col] = null;
         //increase merges so that we don't check a slot we already merged
@@ -295,7 +308,7 @@ const moveDown = () => {
       }
     }
   }
-//  boop();
+  boop();
   addScore();
   spawnRandomTile();
   updateGrid();
@@ -330,7 +343,7 @@ const moveLeft = () => {
       }
     }
   }
-//  boop();
+  boop();
   spawnRandomTile();
   updateGrid();
   if(checkLoss(grid)) {
@@ -358,7 +371,7 @@ const moveRight = () => {
       }
     }
   }
-//  boop();
+  boop();
   spawnRandomTile();
   updateGrid();
   if(checkLoss(grid)) {
@@ -386,7 +399,7 @@ const mergeTiles = (set, direction) => {
         set[index] = value*2;
         scoreAdd = value*2;
         score += scoreAdd;
-        console.log(scoreAdd);
+        beep();
         //remove the starter number, it will now be merged into set[index]
         set[i] = null;
         //increase merges so that we don't check a slot we already merged
@@ -419,7 +432,7 @@ const mergeTiles = (set, direction) => {
         set[index] = value*2;
         scoreAdd = value*2;
         score += scoreAdd;
-        console.log(scoreAdd);
+        beep();
         //remove the starter number, it will now be merged into set[index]
         set[i] = null;
         //increase merges so that we don't check a slot we already merged
@@ -502,7 +515,14 @@ const checkLoss = (arr) => {
     }
   }
   gameMessage.innerHTML= "Loss";
+  bwah();
   return true;
+}
+
+const restartGame = () =>{
+  createGrid();
+  spawnRandomTile();
+  updateGrid();
 }
 
 module.exports = {
